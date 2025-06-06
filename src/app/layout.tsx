@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Merriweather, Fira_Code  } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,7 +33,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-       <body className={`${inter.variable} ${merriweather.variable} ${firaCode.variable} antialiased`}>
+       <body className={`${inter.variable} ${merriweather.variable} ${firaCode.variable} bg-brand-primary antialiased`}>
+        <Navbar/>
         {children}
       </body>
     </html>

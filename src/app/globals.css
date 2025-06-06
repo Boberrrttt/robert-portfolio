@@ -6,16 +6,16 @@
 } */
 
 @theme inline {
-  
+  --color-brand-primary: #200F21;
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-} */
+}
 
 body {
-  font-family: var(--font-merriweather), serif;
+  font-family: var(--font-inter), serif;
 }
