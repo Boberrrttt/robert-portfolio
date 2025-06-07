@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react'
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState('about')
+  const navItems = ['about', 'projects', 'contact']
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['about', 'projects', 'contact']
       const scrollPos = window.scrollY + 100 
 
-      for (const section of sections) {
+      for (const section of navItems) {
         const el = document.getElementById(section)
         if (el && el.offsetTop <= scrollPos) {
           setActiveSection(section)
@@ -30,7 +30,7 @@ const Navbar = () => {
       </div>
 
       <ul className="flex gap-10 font-bold">
-        {['about', 'projects', 'contact'].map((section) => (
+        {navItems.map((section) => (
           <li key={section}>
             <a
               href={`#${section}`}
