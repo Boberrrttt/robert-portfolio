@@ -4,7 +4,7 @@ const ProjectsSection = () => {
     return (
         <section className="h-screen" id="projects">
             <RevealOnScroll>
-                asjdfbnkjansdfasdfsadjkfnksajldnfkljsadnfkjnsadklfjnsdkjnfkdsjnfkljadsn
+                asjdfbnkjansdfasdfsadjkfnksajldnfklj
         
             </RevealOnScroll>
         </section>
