@@ -17,7 +17,7 @@ const directionVariants = {
   center: { opacity: 0 },
 };
 
-export default function RevealOnScroll({ children, direction = 'up' }: Props) {
+export default function RevealOnScroll({ children, direction = 'right' }: Props) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, margin: "-100px" });
 

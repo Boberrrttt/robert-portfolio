@@ -1,24 +1,33 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState('about')
-  const navItems = ['about', 'projects', 'contact']
+  const lastSectionRef = useRef('about') // track last updated section
+  const navItems = ['about', 'skills', 'projects', 'contact']
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 100 
+      const scrollPos = window.scrollY + window.innerHeight / 2
 
-      for (const section of navItems) {
+      for (let i = navItems.length - 1; i >= 0; i--) {
+        const section = navItems[i]
         const el = document.getElementById(section)
+
         if (el && el.offsetTop <= scrollPos) {
-          setActiveSection(section)
+          if (lastSectionRef.current !== section) {
+            setActiveSection(section)
+            history.replaceState(null, '', `#${section}`) // safe to call directly here
+            lastSectionRef.current = section
+          }
+          break
         }
       }
     }
 
     window.addEventListener('scroll', handleScroll)
+    handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -35,7 +44,9 @@ const Navbar = () => {
             <a
               href={`#${section}`}
               className={`cursor-pointer transition-all duration-200 ${
-                activeSection === section ? 'underline underline-offset-8 decoration-white' : 'text-gray-400'
+                activeSection === section
+                  ? 'underline underline-offset-8 decoration-white'
+                  : 'text-gray-400'
               }`}
             >
               {section.charAt(0).toUpperCase() + section.slice(1)}

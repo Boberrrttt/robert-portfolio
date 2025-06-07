@@ -2,11 +2,12 @@ import RevealOnScroll from "@/components/RevealOnScroll"
 
 const ProjectsSection = () => {
     return (
-        <RevealOnScroll direction="up">
-            <section className="h-screen" id="projects">
+        <section className="h-screen" id="projects">
+            <RevealOnScroll>
                 asjdfbnkjansdfasdfsadjkfnksajldnfkljsadnfkjnsadklfjnsdkjnfkdsjnfkljadsn
-            </section>
-        </RevealOnScroll>
+        
+            </RevealOnScroll>
+        </section>
     )
 }
 
