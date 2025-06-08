@@ -34,7 +34,7 @@ const SkillsSection = () => {
     
 
   return (
-    <section className="h-screen relative flex justify-center" id="skills">
+    <section className="h-screen relative flex bg-brand-secondary justify-center" id="skills">
         <RevealOnScroll>
             <div className="flex justify-center flex-col items-center">
                 <div className="flex mt-24 justify-center flex-col items-center">
