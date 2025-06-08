@@ -47,6 +47,12 @@ const Navbar = () => {
             <li key={section}>
               <a
                 href={`#${section}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  const target = document.getElementById(section)
+                  target?.scrollIntoView({ behavior: 'smooth' })
+                  setMenuOpen(false) 
+                }}
                 className={`cursor-pointer transition-all duration-200 ${
                   activeSection === section
                     ? 'underline underline-offset-8 decoration-white'
@@ -55,6 +61,7 @@ const Navbar = () => {
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </a>
+
             </li>
           ))}
         </ul>
@@ -75,7 +82,12 @@ const Navbar = () => {
             <li key={section}>
               <a
                 href={`#${section}`}
-                onClick={() => setMenuOpen(false)} // close menu on click
+                onClick={(e) => {
+                  e.preventDefault()
+                  const target = document.getElementById(section)
+                  target?.scrollIntoView({ behavior: 'smooth' })
+                  setMenuOpen(false) // closes the menu if mobile
+                }}
                 className={`cursor-pointer transition-all duration-200 ${
                   activeSection === section
                     ? 'underline underline-offset-8 decoration-white'
@@ -84,6 +96,7 @@ const Navbar = () => {
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </a>
+
             </li>
           ))}
         </ul>
