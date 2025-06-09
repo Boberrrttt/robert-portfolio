@@ -1,4 +1,5 @@
 import { IconCloud } from "@/components/magicui/icon-cloud";
+import { Particles } from "@/components/magicui/particles";
 import RevealOnScroll from "@/components/RevealOnScroll"
 
 const SkillsSection = () => {
@@ -25,7 +26,8 @@ const SkillsSection = () => {
         "laravel",
         "latex",
         "python",
-        "flask"
+        "flask",
+        "netlify"
     ];
 
     const images = slugs.map(
@@ -35,6 +37,7 @@ const SkillsSection = () => {
 
   return (
     <section className="h-screen relative flex bg-brand-secondary justify-center items-center" id="skills">
+        <Particles className="w-full h-full absolute "/>
         <RevealOnScroll>
             <div className="grid grid-cols-2">
                     <div className="flex mt-24 md:w-[90%]  pl-32 flex-col">
