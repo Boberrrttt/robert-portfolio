@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
+import "@fancyapps/ui/dist/fancybox/fancybox.css"; 
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,29 +11,53 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Lens } from "@/components/magicui/lens";
+import { useEffect } from "react";
+import { Fancybox } from '@fancyapps/ui';
 
-const ProjectCard = () => {
+interface ProjectCardTypes {
+  image: string
+  title: string
+  description: string
+  url?: string
+}
+
+const ProjectCard = ({ image, title, description, url }: ProjectCardTypes) => {
+  useEffect(() => {
+    Fancybox.bind(`[data-fancybox="gallery-${title}"]`, {});
+
+    return () => {
+      Fancybox.destroy();
+    };
+  }, [title]);
+  
   return (
-    <Card className="relative w-70  shadow-none">
+    <Card className="relative w-[90%] bg-brand-tertiary shadow-none border-none">
       <CardHeader>
-        <Lens defaultPosition={{ x: 260, y: 150 }}>
-          <img
-            src="https://images.unsplash.com/photo-1736606355698-5efdb410fe93?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="image placeholder"
-            width={300}
-            height={300}
-          />
-        </Lens>
+          <Lens defaultPosition={{ x: 260, y: 150 }}>
+          <a
+            href={image}
+            onClick={(e) => {
+              e.preventDefault(); 
+              Fancybox.show([
+                {
+                  src: image,
+                  type: "image",
+                },
+              ]);
+            }}
+          >
+            <img src={image} className="cursor-pointer" />
+          </a>
+          </Lens>
       </CardHeader>
       <CardContent>
-        <CardTitle className="text-2xl">Your next camp</CardTitle>
-        <CardDescription>
-          See our latest and best camp destinations all across the five
-          continents of the globe.
+        <CardTitle className="text-xl">{title}</CardTitle>
+        <CardDescription className=" mt-3 h-28">
+          {description}
         </CardDescription>
       </CardContent>
       <CardFooter className="space-x-4">
-        <Button>Open Site</Button>
+        <Button className="cursor-pointer" onClick={() => window.open(url, '_blank')} disabled={!url}>Open Site</Button>
       </CardFooter>
     </Card>
   );

@@ -9,6 +9,7 @@ const Navbar = () => {
   const lastSectionRef = useRef('about')
   const navItems = ['about', 'skills', 'projects', 'contact']
 
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY + window.innerHeight / 2
