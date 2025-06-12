@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X } from 'lucide-react' // You can use any icon library
+import Image from 'next/image'
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState('about')
@@ -32,13 +33,13 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll)
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [navItems])
 
   return (
     <nav className="shadow-md fixed top-0 left-0 bg-brand-primary z-50 w-full">
       <div className="flex justify-between items-center text-white py-6 px-8">
         <div className="flex items-center gap-3">
-          <img src="/assets/wave.gif" alt="Wave" className="w-10 h-10" />
+          <Image src="/assets/wave.gif" alt="Wave" className="w-10 h-10" />
           <h1 className="font-bold text-xl">Robert S.</h1>
         </div>
 

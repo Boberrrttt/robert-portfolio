@@ -4,7 +4,7 @@ const ContactsSection = () => {
             <div className="container mx-auto px-4">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-bold mb-12 text-center">Get in Touch</h2>
                 <div className="max-w-2xl mx-auto text-center">
-                    <p className="text-gray-300 mb-8 md:mb-12">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
+                    <p className="text-gray-300 mb-8 md:mb-12">I'&apos; always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
                     <div className="flex flex-col md:flex-row justify-center gap-6 md:gap-8">
                         <a 
                             href="https://github.com/Boberrrttt" 
