@@ -31,7 +31,7 @@ const ProjectCard = ({ image, title, description, url }: ProjectCardTypes) => {
   }, [title]);
   
   return (
-    <Card className="relative w-[90%] h-[460px] bg-brand-tertiary shadow-none border-none">
+    <Card className="relative w-[90%] h-full bg-brand-tertiary shadow-none border-none">
       <CardHeader>
           <Lens defaultPosition={{ x: 260, y: 150 }}>
           <a

@@ -317,20 +317,109 @@ export function IconCloud({ icons, images }: IconCloudProps) {
     };
   }, [icons, images, iconPositions, isDragging, mousePos, targetRotation]);
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const updateCanvasSize = () => {
+      const container = canvas.parentElement;
+      if (!container) return;
+
+      const maxWidth = container.clientWidth;
+      const maxHeight = container.clientHeight;
+      
+      // Maintain aspect ratio while fitting within container
+      const aspectRatio = 1;
+      let newWidth = maxWidth;
+      let newHeight = maxHeight;
+      
+      if (newWidth > newHeight) {
+        newWidth = newHeight * aspectRatio;
+      } else {
+        newHeight = newWidth * aspectRatio;
+      }
+      
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+    };
+
+    // Initial size update
+    updateCanvasSize();
+
+    // Add resize listener
+    const resizeObserver = new ResizeObserver(() => {
+      updateCanvasSize();
+    });
+
+    if (canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const updateIconPositions = () => {
+      const newIcons: Icon[] = [];
+      const numIcons = (icons?.length || images?.length || 20);
+      const offset = 2 / numIcons;
+      const increment = Math.PI * (3 - Math.sqrt(5));
+
+      for (let i = 0; i < numIcons; i++) {
+        const y = i * offset - 1 + offset / 2;
+        const r = Math.sqrt(1 - y * y);
+        const phi = i * increment;
+
+        const x = Math.cos(phi) * r;
+        const z = Math.sin(phi) * r;
+        const spread = canvas.width * 0.4; // Adjust spread based on canvas size
+
+        newIcons.push({
+          x: x * spread,
+          y: y * spread,
+          z: z * spread,
+          scale: 1,
+          opacity: 1,
+          id: i,
+        });
+      }
+      setIconPositions(newIcons);
+    };
+
+    updateIconPositions();
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateIconPositions();
+    });
+
+    if (canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [canvasRef, icons, images]);
+
   return (
     <RevealOnScroll>
-          <canvas
-            ref={canvasRef}
-            width={600}
-            height={600}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-            className="rounded-lg"
-            aria-label="Interactive 3D Icon Cloud"
-            role="img"
-          />
+      <div className="relative w-full max-w-[600px] mx-auto">
+        <canvas
+          ref={canvasRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          className="rounded-lg w-full h-auto max-w-[600px] max-h-[600px]"
+          aria-label="Interactive 3D Icon Cloud"
+          role="img"
+        />
+      </div>
     </RevealOnScroll>
   );
 }
