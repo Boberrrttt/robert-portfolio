@@ -31,7 +31,7 @@ const ProjectCard = ({ image, title, description, url }: ProjectCardTypes) => {
   }, [title]);
   
   return (
-    <Card className="relative w-[90%] h-full bg-brand-tertiary shadow-none border-none">
+    <Card className="relative  h-full bg-brand-tertiary shadow-none border-none">
       <CardHeader>
           <Lens defaultPosition={{ x: 260, y: 150 }}>
           <a
@@ -46,13 +46,13 @@ const ProjectCard = ({ image, title, description, url }: ProjectCardTypes) => {
               ]);
             }}
           >
-            <img src={image} className="cursor-pointer" />
+            <img src={image} className="cursor-pointer h-40 md:h-56 object-cover" />
           </a>
           </Lens>
       </CardHeader>
       <CardContent>
         <CardTitle className="text-xl">{title}</CardTitle>
-        <CardDescription className=" mt-3 h-28">
+        <CardDescription className=" my-5 h-28">
           {description}
         </CardDescription>
       </CardContent>

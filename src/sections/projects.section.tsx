@@ -5,7 +5,7 @@ const ProjectsSection = () => {
     return (
         <section className="flex justify-center text-white" id="projects">
             <RevealOnScroll>
-                <div className="flex h-full flex-col items-center px-4 sm:px-8 md:px-12 lg:px-20">
+                <div className="flex h-full flex-col items-center px-7">
                     <h1 className="font-bold text-3xl pt-20 md:text-4xl lg:text-6xl mb-16 md:mb-20">Web Projects</h1>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 place-items-center">
                         <ProjectCard
@@ -37,7 +37,7 @@ const ProjectsSection = () => {
                         <ProjectCard 
                             image="/assets/Screenshot 2025-06-10 120233.png"
                             title="Valcardi"
-                            description="Anonymous love letter sharing platform for Valentine's Day, allowing users to express their feelings through heartfelt messages while maintaining privacy. Features secure message delivery and a clean, user-friendly interface."
+                            description="Anonymous Valentine's Day love letter platform with secure message delivery and a clean interface."
                             url="https://valcardi.vercel.app/"
                         />
                     </div>
@@ -52,7 +52,7 @@ const ProjectsSection = () => {
                         <ProjectCard 
                             image="/assets/attendance-tracker.png"
                             title="ICpEP Attendance Tracker"
-                            description="Comprehensive attendance management system for USTP CPE students, enabling real-time tracking during events, seminars, and academic activities. Features include automated check-ins, and attendance reports."
+                            description="Real-time attendance tracking system for USTP CPE students with automated check-ins and reporting."
                         />
                     </div>
                 </div>

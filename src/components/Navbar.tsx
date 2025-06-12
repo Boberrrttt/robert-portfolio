@@ -39,7 +39,7 @@ const Navbar = () => {
     <nav className="shadow-md fixed top-0 left-0 bg-brand-primary z-50 w-full">
       <div className="flex justify-between items-center text-white py-6 px-8">
         <div className="flex items-center gap-3">
-          <Image src="/assets/wave.gif" alt="Wave" className="w-10 h-10" />
+          <Image src="/assets/wave.gif" width={20} height={20} alt="Wave" className="w-10 h-10" />
           <h1 className="font-bold text-xl">Robert S.</h1>
         </div>
 

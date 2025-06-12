@@ -9,7 +9,7 @@ const AboutSection = () => {
                 <div className="p-7">
                     <h1 className="text-lg">Hi there,</h1>
                     <p className="mt-2 font-bold text-4xl md:text-8xl">I&apos;m Robert!</p>
-                    <p className="mt-4 max-w-xl text-sm md:text-lg text-gray-300">
+                    <p className="mt-4 max-w-xl text-sm md:text-lg text-gray-300 text-justify">
                         I&apos;m a <span className="text-blue-300 font-semibold">Computer Engineering student</span> with hands-on experience in software development and the IT industry.
                         I&apos;m passionate about <span className="text-blue-300 font-semibold">programming</span>, and I love building websites and mobile applications.
                         I thrive on learning new technologies and find great satisfaction in solving complex problems.
