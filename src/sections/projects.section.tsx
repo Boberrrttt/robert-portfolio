@@ -6,8 +6,14 @@ const ProjectsSection = () => {
         <section className="flex justify-center text-white" id="projects">
             <RevealOnScroll>
                 <div className="flex h-full flex-col items-center px-7">
-                    <h1 className="font-bold text-3xl pt-20 md:text-4xl lg:text-6xl mb-16 md:mb-20">Web Projects</h1>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 place-items-center">
+                    <h1 className="font-bold text-3xl pt-20 md:text-4xl lg:text-5xl mb-16 md:mb-20">Web Projects</h1>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 place-items-center">
+                        <ProjectCard
+                         image="/assets/eventure.png"
+                         title="Eventure"
+                         description="An event management platform built with React and Node.js, featuring flexible event creation, user registration, and a dynamic dashboard for organizers."
+                        />
+
                         <ProjectCard
                          image="/assets/Screenshot 2025-06-08 193309.png"
                          title="Forest Monitoring"
@@ -42,8 +48,8 @@ const ProjectsSection = () => {
                         />
                     </div>
 
-                    <h1 className="font-bold text-3xl pt-20 md:text-4xl lg:text-6xl mb-16 md:mb-20">Mobile Projects</h1>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 place-items-center">
+                    <h1 className="font-bold text-3xl pt-20 md:text-4xl lg:text-5xl mb-16 md:mb-20">Mobile Projects</h1>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 place-items-center">
                         <ProjectCard 
                             image="/assets/parkease-img.png"
                             title="Parkease"
@@ -53,6 +59,11 @@ const ProjectsSection = () => {
                             image="/assets/attendance-tracker.png"
                             title="ICpEP Attendance Tracker"
                             description="Real-time attendance tracking system for USTP CPE students with automated check-ins and reporting."
+                        />
+                        <ProjectCard 
+                          image="/assets/timpla.jpg"
+                          title="Timpla App"
+                          description="A mealkit ordering app built with React Native and Node.js, allowing users to browse, filter, and order meal kits with real-time price calculations and smooth checkout experience."
                         />
                     </div>
                 </div>

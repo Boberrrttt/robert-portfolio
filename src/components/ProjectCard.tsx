@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Lens } from "@/components/magicui/lens";
 import { useEffect } from "react";
 import { Fancybox } from '@fancyapps/ui';
 
@@ -31,9 +30,15 @@ const ProjectCard = ({ image, title, description, url }: ProjectCardTypes) => {
   }, [title]);
   
   return (
-    <Card className="relative  h-full bg-brand-tertiary shadow-none border-none">
-      <CardHeader>
-          <Lens defaultPosition={{ x: 260, y: 150 }}>
+    <Card  className="
+          relative h-full
+          bg-zinc-800/90      /* dark but slightly lighter than section */
+          border border-zinc-700
+          rounded-xl
+          transition-all
+          hover:border-zinc-500 hover:shadow-lg" 
+    >
+      <CardHeader className="flex justify-center">
           <a
             href={image}
             onClick={(e) => {
@@ -46,9 +51,8 @@ const ProjectCard = ({ image, title, description, url }: ProjectCardTypes) => {
               ]);
             }}
           >
-            <img src={image} className="cursor-pointer h-40 md:h-56 object-cover" />
+            <img src={image} className="cursor-pointer rounded-xl h-40 md:h-56 object-cover" />
           </a>
-          </Lens>
       </CardHeader>
       <CardContent>
         <CardTitle className="text-xl">{title}</CardTitle>
