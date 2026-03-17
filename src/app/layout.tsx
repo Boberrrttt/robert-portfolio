@@ -22,8 +22,12 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Robert Salvo Portfolio",
-  description: "Portfolio website of Robert Salvo created using NextJs",
+  title: "Robert Salvo | Portfolio — Software Developer",
+  description: "Robert Salvo's portfolio: Computer Engineering student specializing in web & mobile development, React, Next.js, Flutter. Open to opportunities. View projects and get in touch.",
+  openGraph: {
+    title: "Robert Salvo | Portfolio — Software Developer",
+    description: "Web & mobile developer. View projects and contact for opportunities.",
+  },
 };
 
 export default function RootLayout({
@@ -33,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-       <body className={`${inter.variable} ${merriweather.variable} ${firaCode.variable} bg-brand-primary antialiased`}>
+       <body className={`${inter.variable} ${merriweather.variable} ${firaCode.variable} font-sans antialiased min-h-screen`}>
         <Navbar/>
         {children}
       </body>

@@ -1,109 +1,142 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Menu, X } from 'lucide-react' // You can use any icon library
+import { Menu, X } from 'lucide-react'
 import Image from 'next/image'
+
+const navItems = [
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contact' },
+] as const
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState('about')
   const [menuOpen, setMenuOpen] = useState(false)
   const lastSectionRef = useRef('about')
-  const navItems = ['about', 'skills', 'projects', 'contact']
-
+  const navRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY + window.innerHeight / 2
-
       for (let i = navItems.length - 1; i >= 0; i--) {
-        const section = navItems[i]
-        const el = document.getElementById(section)
-
+        const { id } = navItems[i]
+        const el = document.getElementById(id)
         if (el && el.offsetTop <= scrollPos) {
-          if (lastSectionRef.current !== section) {
-            setActiveSection(section)
-            history.replaceState(null, '', `#${section}`)
-            lastSectionRef.current = section
+          if (lastSectionRef.current !== id) {
+            setActiveSection(id)
+            history.replaceState(null, '', `#${id}`)
+            lastSectionRef.current = id
           }
           break
         }
       }
     }
-
     window.addEventListener('scroll', handleScroll)
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [navItems])
+  }, [])
+
+  const goToSection = (id: string) => {
+    const target = document.getElementById(id)
+    target?.scrollIntoView({ behavior: 'smooth' })
+    setMenuOpen(false)
+  }
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) setMenuOpen(false)
+    }
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    document.addEventListener('click', handleClickOutside)
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [menuOpen])
 
   return (
-    <nav className="shadow-md fixed top-0 left-0 bg-brand-primary z-50 w-full">
-      <div className="flex justify-between items-center text-white py-6 px-8">
-        <div className="flex items-center gap-3">
-          <Image src="/assets/wave.gif" width={20} height={20} alt="Wave" className="w-10 h-10" />
-          <h1 className="font-bold text-xl">Robert S.</h1>
+    <>
+      {/* Skip to main content - critical for recruiters using keyboard/screen readers */}
+      <a href="#about" className="skip-link" onClick={(e) => { e.preventDefault(); goToSection('about') }}>
+        Skip to content
+      </a>
+      <nav
+        ref={navRef}
+        className="shadow-lg fixed top-0 left-0 right-0 bg-brand-primary/95 backdrop-blur-sm z-50 border-b border-white/10"
+        aria-label="Main navigation"
+      >
+        <div className="flex justify-between items-center text-white py-4 px-6 md:py-5 md:px-10 max-w-7xl mx-auto">
+          <a
+            href="#about"
+            onClick={(e) => { e.preventDefault(); goToSection('about') }}
+            className="flex items-center gap-3 hover:opacity-90 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-primary rounded"
+            aria-label="Robert Salvo - go to top"
+          >
+            <Image src="/assets/wave.gif" width={40} height={40} alt="" className="w-8 h-8 md:w-10 md:h-10" />
+            <span className="font-bold text-lg md:text-xl">Robert Salvo</span>
+          </a>
+
+          <ul className="hidden md:flex gap-8 font-semibold" role="list">
+            {navItems.map(({ id, label }) => (
+              <li key={id}>
+                <a
+                  href={`#${id}`}
+                  onClick={(e) => { e.preventDefault(); goToSection(id) }}
+                  className={`py-2 px-1 transition-all duration-200 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-primary ${
+                    activeSection === id
+                      ? 'text-white underline underline-offset-8 decoration-2 decoration-white'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                  aria-current={activeSection === id ? 'true' : undefined}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <button
+            type="button"
+            className="md:hidden p-2 text-white rounded-lg hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {menuOpen ? <X size={28} aria-hidden /> : <Menu size={28} aria-hidden />}
+          </button>
         </div>
 
-        {/* Desktop nav */}
-        <ul className="hidden md:flex gap-10 font-bold">
-          {navItems.map((section) => (
-            <li key={section}>
-              <a
-                href={`#${section}`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  const target = document.getElementById(section)
-                  target?.scrollIntoView({ behavior: 'smooth' })
-                  setMenuOpen(false) 
-                }}
-                className={`cursor-pointer transition-all duration-200 ${
-                  activeSection === section
-                    ? 'underline underline-offset-8 decoration-white'
-                    : 'text-gray-400'
-                }`}
-              >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </a>
-
-            </li>
-          ))}
-        </ul>
-
-        {/* Hamburger icon */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setMenuOpen(!menuOpen)}
+        <div
+          id="mobile-menu"
+          className={`md:hidden overflow-hidden transition-all duration-200 ${menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'}`}
+          aria-hidden={!menuOpen}
         >
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <ul className="md:hidden flex flex-col items-center gap-6 font-bold py-6 bg-brand-primary text-white">
-          {navItems.map((section) => (
-            <li key={section}>
-              <a
-                href={`#${section}`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  const target = document.getElementById(section)
-                  target?.scrollIntoView({ behavior: 'smooth' })
-                  setMenuOpen(false) // closes the menu if mobile
-                }}
-                className={`cursor-pointer transition-all duration-200 ${
-                  activeSection === section
-                    ? 'underline underline-offset-8 decoration-white'
-                    : 'text-gray-400'
-                }`}
-              >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </a>
-
-            </li>
-          ))}
-        </ul>
-      )}
-    </nav>
+          <ul className="flex flex-col items-center gap-1 py-6 px-4 bg-brand-secondary/50 border-t border-white/10" role="list">
+            {navItems.map(({ id, label }) => (
+              <li key={id} className="w-full">
+                <a
+                  href={`#${id}`}
+                  onClick={(e) => { e.preventDefault(); goToSection(id) }}
+                  className={`block w-full text-center py-4 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset ${
+                    activeSection === id ? 'bg-white/15 text-white font-semibold' : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                  }`}
+                  aria-current={activeSection === id ? 'true' : undefined}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+    </>
   )
 }
 

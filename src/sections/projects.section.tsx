@@ -3,11 +3,15 @@ import RevealOnScroll from "@/components/RevealOnScroll"
 
 const ProjectsSection = () => {
     return (
-        <section className="flex justify-center text-white" id="projects">
-            <RevealOnScroll>
-                <div className="flex h-full flex-col items-center px-7">
-                    <h1 className="font-bold text-3xl pt-20 md:text-4xl lg:text-5xl mb-16 md:mb-20">Web Projects</h1>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 place-items-center">
+        <section className="flex justify-center text-white bg-brand-primary py-16 md:py-24" id="projects" aria-labelledby="projects-heading">
+            <div className="w-full max-w-7xl mx-auto px-6 md:px-10">
+                <RevealOnScroll>
+                    <header className="text-center mb-14 md:mb-16">
+                        <h2 id="projects-heading" className="font-bold text-3xl md:text-4xl lg:text-5xl mb-4">Projects</h2>
+                        <p className="text-gray-300 text-lg max-w-2xl mx-auto">Web and mobile apps I&apos;ve built—from event platforms to AI tools and community apps.</p>
+                    </header>
+                    <h3 className="font-semibold text-xl md:text-2xl text-white/90 mb-8 md:mb-10">Web</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 place-items-stretch mb-20 md:mb-24">
                         <ProjectCard
                          image="/assets/eventure.png"
                          title="Eventure"
@@ -48,8 +52,8 @@ const ProjectsSection = () => {
                         />
                     </div>
 
-                    <h1 className="font-bold text-3xl pt-20 md:text-4xl lg:text-5xl mb-16 md:mb-20">Mobile Projects</h1>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12 place-items-center">
+                    <h3 className="font-semibold text-xl md:text-2xl text-white/90 mb-8 md:mb-10">Mobile</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 place-items-stretch">
                         <ProjectCard 
                             image="/assets/parkease-img.png"
                             title="Parkease"
@@ -63,11 +67,11 @@ const ProjectsSection = () => {
                         <ProjectCard 
                           image="/assets/timpla.jpg"
                           title="Timpla App"
-                          description="A mealkit ordering app built with React Native and Node.js, allowing users to browse, filter, and order meal kits with real-time price calculations and smooth checkout experience."
+                          description="Mealkit ordering app (React Native & Node.js) with browse, filter, and checkout. Available on App Store and Google Play."
                         />
                     </div>
-                </div>
-            </RevealOnScroll>
+                </RevealOnScroll>
+            </div>
         </section>
     )
 }

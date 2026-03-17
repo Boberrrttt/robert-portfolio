@@ -23,19 +23,18 @@ const SkillsSection = () => {
   };
 
   return (
-    <section 
+    <section
       className="relative flex bg-gradient-to-b from-brand-secondary/80 to-brand-secondary justify-center items-center min-h-screen py-24 md:py-32"
       id="skills"
+      aria-labelledby="skills-heading"
     >
       <Particles className="absolute inset-0" />
       <RevealOnScroll>
-        <div className="container mx-auto px-6 lg:px-12">
+        <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-            
-            {/* Left: Skill cards */}
             <div className="flex flex-col justify-center">
-              <h2 className="text-white font-bold text-4xl md:text-5xl lg:text-6xl mb-8">
-                My Top Skills
+              <h2 id="skills-heading" className="text-white font-bold text-4xl md:text-5xl lg:text-6xl mb-8">
+                Skills
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
